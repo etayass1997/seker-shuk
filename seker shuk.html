@@ -9,6 +9,8 @@
 <meta name="apple-mobile-web-app-title" content="ניתוח שוק">
 <meta name="mobile-web-app-capable" content="yes">
 <title>סוכן ניתוח שוק</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -428,9 +430,20 @@
 /* ═══════════════════════════════════
    STATE
 ═══════════════════════════════════ */
-const STORAGE_KEY = 'mkt_api_key_v1';
-const history_arr = [];
+const STORAGE_KEY  = 'mkt_api_key_v1';
+const HISTORY_KEY  = 'mkt_history_v1';
+const history_arr  = [];
 let lastTopic = '';
+
+function loadHistory() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+    history_arr.push(...saved.slice(0, 20));
+  } catch {}
+}
+function saveHistory() {
+  try { localStorage.setItem(HISTORY_KEY, JSON.stringify(history_arr.slice(0, 20))); } catch {}
+}
 
 /* ═══════════════════════════════════
    KEY HELPERS
@@ -451,7 +464,16 @@ function showScreen(id) {
    INIT
 ═══════════════════════════════════ */
 window.addEventListener('DOMContentLoaded', () => {
-  showScreen(getKey() ? 'main' : 'setup');
+  loadHistory();
+  if (getKey()) {
+    showScreen('main');
+    if (history_arr.length > 0) {
+      renderResult(history_arr[0]);
+      renderHistory();
+    }
+  } else {
+    showScreen('setup');
+  }
   document.getElementById('setupKey').addEventListener('keydown', e => {
     if (e.key === 'Enter') doSaveKey();
   });
@@ -522,10 +544,11 @@ async function runAnalysis() {
   lastTopic = topic;
 
   const systemPrompt = `אתה סוכן ניתוח שוק מקצועי. היום: ${todayFull()}.
-עבוד בעברית בלבד. חפש מידע עדכני ובנה ניתוח מהימן ומעמיק.
-החזר JSON בלבד, ללא טקסט נוסף, ללא markdown, ללא backticks:
+שלב 1 — חפש תחילה ברשת מידע עדכני על הנושא.
+שלב 2 — לאחר החיפוש, בנה ניתוח מבוסס-נתונים בעברית בלבד.
+שלב 3 — החזר JSON בלבד, ללא טקסט נוסף לפני או אחרי, ללא markdown:
 {"title":"כותרת הניתוח","summary":"סיכום 2-3 משפטים על המצב הנוכחי","points":["נקודה 1","נקודה 2","נקודה 3","נקודה 4","נקודה 5"]}
-ה-points הן 4-6 נקודות ממוקדות, כל אחת משפט אחד עם נתון/עובדה ספציפיים.`;
+ה-points הן 4-6 נקודות ממוקדות, כל אחת משפט אחד עם נתון או עובדה ספציפיים מהחיפוש.`;
 
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
@@ -538,7 +561,7 @@ async function runAnalysis() {
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
-        max_tokens: 1200,
+        max_tokens: 2000,
         system: systemPrompt,
         tools: [{ type: 'web_search_20250305', name: 'web_search' }],
         messages: [{ role: 'user', content: `נתח לעומק את השוק הבא: ${topic}` }]
@@ -561,8 +584,10 @@ async function runAnalysis() {
       .map(b => b.text)
       .join('');
 
-    const clean  = textBlock.replace(/```json|```/g, '').trim();
-    const parsed = JSON.parse(clean);
+    // Extract JSON robustly — handles preamble text from model
+    const jsonMatch = textBlock.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('המודל לא החזיר JSON תקין. נסה שוב.');
+    const parsed = JSON.parse(jsonMatch[0]);
 
     const result = { topic, ...parsed, time: nowStr() };
     renderResult(result);
@@ -626,6 +651,7 @@ function renderResult(r) {
 ═══════════════════════════════════ */
 function pushHistory(r) {
   history_arr.unshift(r);
+  saveHistory();
   renderHistory();
 }
 
@@ -758,6 +784,13 @@ function doLogout() {
   document.getElementById('historyArea').innerHTML = '';
   history_arr.length = 0;
   showScreen('setup');
+}
+
+/* ═══════════════════════════════════
+   SERVICE WORKER
+═══════════════════════════════════ */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(() => {});
 }
 
 /* ═══════════════════════════════════
