@@ -2,7 +2,7 @@
   "name": "סוכן ניתוח שוק",
   "short_name": "ניתוח שוק",
   "description": "ניתוח שוק מבוסס AI בעברית — מידע עדכני מהרשת",
-  "start_url": "./seker shuk.html",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#0d0d0d",

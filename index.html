@@ -339,6 +339,33 @@
   }
   .btn-danger:hover { background: rgba(245,99,99,.08); }
 
+  /* Sites input */
+  .sites-input {
+    width: 100%; height: 42px; padding: 0 14px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); color: var(--text);
+    font-family: var(--font); font-size: 13px; direction: rtl;
+    outline: none; transition: border-color .2s, box-shadow .2s;
+    margin-bottom: 10px;
+  }
+  .sites-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
+  .sites-input::placeholder { color: var(--text-muted); font-size: 12px; }
+
+  /* Deep mode toggle */
+  .mode-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+  .mode-label { font-size: 12px; color: var(--text-dim); }
+  .btn-mode {
+    font-size: 12px; padding: 5px 14px;
+    border: 1px solid var(--border); border-radius: 20px;
+    color: var(--text-dim); cursor: pointer;
+    background: transparent; font-family: var(--font);
+    transition: all .2s;
+  }
+  .btn-mode.deep-active {
+    border-color: var(--accent); color: var(--accent);
+    background: var(--accent-dim);
+  }
+
   /* ── Desktop tweak ── */
   @media (min-width: 600px) {
     .main-scroll { max-width: 680px; width: 100%; margin: 0 auto; align-self: center; }
@@ -351,6 +378,104 @@
     .overlay .sheet { transform: scale(.95) translateY(10px); }
     .overlay.open .sheet { transform: scale(1) translateY(0); }
   }
+
+  /* ── Custom chips manager ── */
+  .custom-chip-row {
+    display: flex; gap: 7px; margin-bottom: 10px;
+  }
+  .custom-chip-input {
+    flex: 1; height: 38px; padding: 0 12px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius); color: var(--text);
+    font-family: var(--font); font-size: 13px; direction: rtl;
+    outline: none; transition: border-color .2s;
+  }
+  .custom-chip-input:focus { border-color: var(--accent); }
+  .btn-add-chip {
+    height: 38px; padding: 0 14px;
+    background: var(--accent); border: none; border-radius: var(--radius);
+    color: #fff; font-family: var(--font); font-size: 13px; font-weight: 600;
+    cursor: pointer; white-space: nowrap; transition: opacity .2s;
+  }
+  .btn-add-chip:hover { opacity: .88; }
+  .custom-chips-list { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 6px; }
+  .custom-chip-tag {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 12px; padding: 4px 10px;
+    border: 1px solid var(--accent); border-radius: 20px;
+    color: var(--accent); background: var(--accent-dim);
+  }
+  .remove-custom-chip {
+    background: none; border: none; cursor: pointer;
+    color: var(--accent); font-size: 13px; padding: 0 2px; line-height: 1;
+  }
+
+  /* ── Comparison card ── */
+  .compare-card {
+    background: var(--surface2); border: 1px solid var(--border-soft);
+    border-radius: var(--radius); padding: 14px 16px;
+    margin-bottom: 14px; animation: fadeUp .28s ease;
+  }
+  .compare-title {
+    font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 10px;
+  }
+  .compare-row {
+    display: flex; gap: 8px; align-items: flex-start;
+    font-size: 13px; padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-badge {
+    font-size: 10px; font-weight: 700; border-radius: 4px;
+    padding: 2px 6px; flex-shrink: 0; margin-top: 2px;
+  }
+  .badge-new  { background: rgba(62,207,142,.15); color: var(--success); }
+  .badge-gone { background: rgba(245,99,99,.1);   color: var(--error);   }
+  .badge-same { background: var(--accent-dim);    color: var(--text-dim);}
+  .compare-prev-time { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
+
+  /* ── Chat with agent about the analysis ── */
+  .chat-section { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+  .chat-label {
+    font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 10px;
+  }
+  .chat-log { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+  .chat-msg { display: flex; }
+  .chat-msg.chat-user { justify-content: flex-end; }
+  .chat-msg.chat-assistant, .chat-msg.chat-error { justify-content: flex-start; }
+  .chat-bubble {
+    max-width: 88%; font-size: 13px; line-height: 1.6;
+    padding: 9px 13px; border-radius: 12px; white-space: pre-wrap;
+  }
+  .chat-user .chat-bubble {
+    background: var(--accent-dim); color: var(--text); border: 1px solid rgba(79,142,247,.25);
+  }
+  .chat-assistant .chat-bubble {
+    background: var(--surface2); color: var(--text); border: 1px solid var(--border-soft);
+  }
+  .chat-error .chat-bubble {
+    background: rgba(245,99,99,.07); color: var(--error); border: 1px solid rgba(245,99,99,.18);
+  }
+  .chat-input-row { display: flex; gap: 8px; }
+  .chat-input {
+    flex: 1; height: 42px; padding: 0 14px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius); color: var(--text);
+    font-family: var(--font); font-size: 13px; direction: rtl;
+    outline: none; transition: border-color .2s; min-width: 0;
+  }
+  .chat-input:focus { border-color: var(--accent); }
+  .chat-input:disabled { opacity: .5; }
+  .btn-chat-send {
+    height: 42px; padding: 0 16px;
+    background: var(--accent); border: none; border-radius: var(--radius);
+    color: #fff; font-family: var(--font); font-size: 13px; font-weight: 600;
+    cursor: pointer; white-space: nowrap; transition: opacity .2s;
+  }
+  .btn-chat-send:hover { opacity: .88; }
+  .btn-chat-send:disabled { opacity: .4; cursor: not-allowed; }
 </style>
 </head>
 <body>
@@ -398,16 +523,19 @@
       <button class="btn-analyze" id="analyzeBtn" onclick="runAnalysis()">נתח ←</button>
     </div>
 
-    <div class="chips-wrap">
-      <button class="chip" onclick="useChip(this)">שוק המניות בת"א</button>
-      <button class="chip" onclick="useChip(this)">נדל"ן בחיפה</button>
-      <button class="chip" onclick="useChip(this)">שוק הקריפטו</button>
-      <button class="chip" onclick="useChip(this)">טכנולוגיה בישראל</button>
-      <button class="chip" onclick="useChip(this)">שוק הנפט הגלובלי</button>
-      <button class="chip" onclick="useChip(this)">רכב חשמלי עולמי</button>
+    <input class="sites-input" id="sitesInput"
+      placeholder="אתרים להתמקד בהם — אופציונלי: ynet.co.il, calcalist.co.il, globes.co.il"
+      oninput="saveSites()" />
+
+    <div class="mode-row">
+      <span class="mode-label">מצב ניתוח:</span>
+      <button class="btn-mode" id="deepModeBtn" onclick="toggleDeepMode()">⚡ מעמיק</button>
     </div>
 
+    <div class="chips-wrap" id="chipsWrap"></div>
+
     <div class="status-line" id="statusLine"></div>
+    <div id="compareArea"></div>
     <div id="resultArea"></div>
     <div id="historyArea"></div>
 
@@ -419,9 +547,23 @@
   <div class="sheet" id="settingsSheet">
     <div class="sheet-handle"></div>
     <div class="sheet-title">⚙ הגדרות</div>
+
     <div class="sheet-label">מפתח API</div>
     <input class="sheet-input" id="sheetKey" type="password" placeholder="sk-ant-…" />
     <button class="btn-primary" onclick="doUpdateKey()">עדכן מפתח</button>
+
+    <div class="sheet-label" style="margin-top:22px;">נושאים מהירים — נהל שבבים</div>
+    <div class="custom-chip-row">
+      <input class="custom-chip-input" id="newChipInput"
+        placeholder="הוסף נושא… למשל: נדל"ן בתל אביב"
+        onkeydown="if(event.key==='Enter') addCustomChip()" />
+      <button class="btn-add-chip" onclick="addCustomChip()">הוסף +</button>
+    </div>
+    <div class="custom-chips-list" id="customChipsList"></div>
+    <div style="font-size:11px;color:var(--text-dim);margin-bottom:16px;">
+      השבבים הקבועים תמיד נשארים. שבבים מותאמים אישית ניתן למחוק.
+    </div>
+
     <button class="btn-danger" onclick="doLogout()">מחק מפתח והתנתק</button>
   </div>
 </div>
@@ -430,10 +572,104 @@
 /* ═══════════════════════════════════
    STATE
 ═══════════════════════════════════ */
-const STORAGE_KEY  = 'mkt_api_key_v1';
-const HISTORY_KEY  = 'mkt_history_v1';
+const STORAGE_KEY       = 'mkt_api_key_v1';
+const HISTORY_KEY       = 'mkt_history_v1';
+const SITES_KEY         = 'mkt_sites_v1';
+const CUSTOM_CHIPS_KEY  = 'mkt_custom_chips_v1';
 const history_arr  = [];
 let lastTopic = '';
+let deepModeActive = false;
+let activeConversation = null; // { result, systemPrompt, messages, chatLog } — chat is session-only, tied to the result it was generated for
+
+const DEFAULT_CHIPS = [
+  'שוק המניות בת"א', 'נדל"ן בחיפה', 'שוק הקריפטו',
+  'טכנולוגיה בישראל', 'שוק הנפט הגלובלי', 'רכב חשמלי עולמי'
+];
+
+/* ═══════════════════════════════════
+   CUSTOM CHIPS
+═══════════════════════════════════ */
+function loadCustomChips() {
+  try { return JSON.parse(localStorage.getItem(CUSTOM_CHIPS_KEY) || '[]'); } catch { return []; }
+}
+function saveCustomChips(chips) {
+  try { localStorage.setItem(CUSTOM_CHIPS_KEY, JSON.stringify(chips)); } catch {}
+}
+
+function renderChips() {
+  const wrap = document.getElementById('chipsWrap');
+  const custom = loadCustomChips();
+  const all = [...DEFAULT_CHIPS, ...custom];
+  wrap.innerHTML = all.map(c =>
+    `<button class="chip" onclick="useChip(this)">${esc(c)}</button>`
+  ).join('');
+}
+
+function renderCustomChipsList() {
+  const chips = loadCustomChips();
+  const el = document.getElementById('customChipsList');
+  if (!chips.length) { el.innerHTML = '<span style="font-size:12px;color:var(--text-dim);">אין שבבים מותאמים עדיין.</span>'; return; }
+  el.innerHTML = chips.map((c, i) =>
+    `<div class="custom-chip-tag">${esc(c)}<button class="remove-custom-chip" onclick="removeCustomChip(${i})" title="הסר">✕</button></div>`
+  ).join('');
+}
+
+function addCustomChip() {
+  const input = document.getElementById('newChipInput');
+  const val = input.value.trim();
+  if (!val) return;
+  const chips = loadCustomChips();
+  if (!chips.includes(val) && !DEFAULT_CHIPS.includes(val)) {
+    chips.push(val);
+    saveCustomChips(chips);
+  }
+  input.value = '';
+  renderChips();
+  renderCustomChipsList();
+}
+
+function removeCustomChip(idx) {
+  const chips = loadCustomChips();
+  chips.splice(idx, 1);
+  saveCustomChips(chips);
+  renderChips();
+  renderCustomChipsList();
+}
+
+/* ═══════════════════════════════════
+   COMPARISON
+═══════════════════════════════════ */
+function findPreviousAnalysis(topic) {
+  const topicLower = topic.toLowerCase();
+  return history_arr.find(h =>
+    h.topic && h.topic.toLowerCase() === topicLower
+  ) || null;
+}
+
+function renderComparison(current, previous) {
+  const area = document.getElementById('compareArea');
+  if (!previous) { area.innerHTML = ''; return; }
+
+  const prevPoints = new Set(previous.points.map(p => p.trim().substring(0, 40)));
+  const currPoints = new Set(current.points.map(p => p.trim().substring(0, 40)));
+
+  const newPoints  = current.points.filter(p => !prevPoints.has(p.trim().substring(0, 40)));
+  const gonePoints = previous.points.filter(p => !currPoints.has(p.trim().substring(0, 40)));
+
+  if (!newPoints.length && !gonePoints.length) { area.innerHTML = ''; return; }
+
+  const rows = [
+    ...newPoints.map(p  => `<div class="compare-row"><span class="compare-badge badge-new">חדש</span><span>${esc(p)}</span></div>`),
+    ...gonePoints.map(p => `<div class="compare-row"><span class="compare-badge badge-gone">ירד</span><span>${esc(p)}</span></div>`)
+  ].join('');
+
+  area.innerHTML = `
+    <div class="compare-card">
+      <div class="compare-title">📈 שינויים מהניתוח הקודם</div>
+      <div class="compare-prev-time">ניתוח קודם: ${previous.time}</div>
+      ${rows}
+    </div>`;
+}
 
 function loadHistory() {
   try {
@@ -443,6 +679,19 @@ function loadHistory() {
 }
 function saveHistory() {
   try { localStorage.setItem(HISTORY_KEY, JSON.stringify(history_arr.slice(0, 20))); } catch {}
+}
+function saveSites() {
+  try { localStorage.setItem(SITES_KEY, document.getElementById('sitesInput').value); } catch {}
+}
+function loadSites() {
+  try {
+    const s = localStorage.getItem(SITES_KEY);
+    if (s) document.getElementById('sitesInput').value = s;
+  } catch {}
+}
+function toggleDeepMode() {
+  deepModeActive = !deepModeActive;
+  document.getElementById('deepModeBtn').classList.toggle('deep-active', deepModeActive);
 }
 
 /* ═══════════════════════════════════
@@ -465,6 +714,8 @@ function showScreen(id) {
 ═══════════════════════════════════ */
 window.addEventListener('DOMContentLoaded', () => {
   loadHistory();
+  loadSites();
+  renderChips();
   if (getKey()) {
     showScreen('main');
     if (history_arr.length > 0) {
@@ -543,40 +794,75 @@ async function runAnalysis() {
   document.getElementById('resultArea').innerHTML = '';
   lastTopic = topic;
 
-  const systemPrompt = `אתה סוכן ניתוח שוק מקצועי. היום: ${todayFull()}.
+  const deep      = deepModeActive;
+  const sitesRaw  = document.getElementById('sitesInput').value.trim();
+  const maxTokens = deep ? 4000 : 2000;
+  const ptRange   = deep ? '8-10' : '4-6';
+
+  let siteInstr = '';
+  if (sitesRaw) {
+    const list = sitesRaw.split(',').map(s => s.trim()).filter(Boolean).slice(0, 3);
+    if (list.length)
+      siteInstr = `חפש מידע **בעיקר** מהאתרים הבאים: ${list.join(', ')}. אם לא מצאת מספיק — הרחב לאתרים נוספים.\n\n`;
+  }
+
+  const systemPrompt = siteInstr + (deep
+    ? `אתה סוכן ניתוח שוק מקצועי ומעמיק. היום: ${todayFull()}.
+שלב 1 — בצע חיפושים מרובים ונפרדים: חיפוש על מגמות עכשוויות, חיפוש על נתונים כמותיים, חיפוש על השוואה לתקופה קודמת, וחיפוש על תחזיות עתידיות.
+שלב 2 — לאחר כל החיפושים, בנה ניתוח מבוסס-נתונים מקיף בעברית בלבד.
+שלב 3 — החזר JSON בלבד, ללא טקסט נוסף לפני או אחרי, ללא markdown:
+{"title":"כותרת הניתוח","summary":"סיכום 3-4 משפטים מקיפים על המצב הנוכחי","points":["נקודה 1","נקודה 2","נקודה 3","נקודה 4","נקודה 5","נקודה 6","נקודה 7","נקודה 8"]}
+ה-points הן ${ptRange} נקודות מעמיקות, כל אחת משפט אחד עם נתון ספציפי מהחיפוש.`
+    : `אתה סוכן ניתוח שוק מקצועי. היום: ${todayFull()}.
 שלב 1 — חפש תחילה ברשת מידע עדכני על הנושא.
 שלב 2 — לאחר החיפוש, בנה ניתוח מבוסס-נתונים בעברית בלבד.
 שלב 3 — החזר JSON בלבד, ללא טקסט נוסף לפני או אחרי, ללא markdown:
 {"title":"כותרת הניתוח","summary":"סיכום 2-3 משפטים על המצב הנוכחי","points":["נקודה 1","נקודה 2","נקודה 3","נקודה 4","נקודה 5"]}
-ה-points הן 4-6 נקודות ממוקדות, כל אחת משפט אחד עם נתון או עובדה ספציפיים מהחיפוש.`;
+ה-points הן ${ptRange} נקודות ממוקדות, כל אחת משפט אחד עם נתון ספציפי מהחיפוש.`
+  );
+
+  const messages = [{ role: 'user', content: `נתח לעומק את השוק הבא: ${topic}` }];
+  let data;
 
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 2000,
-        system: systemPrompt,
-        tools: [{ type: 'web_search_20250305', name: 'web_search' }],
-        messages: [{ role: 'user', content: `נתח לעומק את השוק הבא: ${topic}` }]
-      })
-    });
+    while (true) {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: maxTokens,
+          system: systemPrompt,
+          tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+          messages
+        })
+      });
 
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      throw new Error(err.error?.message || `שגיאת שרת ${res.status}`);
-    }
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error?.message || `שגיאת שרת ${res.status}`);
+      }
 
-    const data = await res.json();
+      data = await res.json();
 
-    if (data.stop_reason !== 'end_turn') {
-      throw new Error(`הניתוח לא הושלם (${data.stop_reason || 'unknown'}). נסה שוב.`);
+      if (data.stop_reason === 'end_turn') break;
+
+      if (data.stop_reason === 'pause_turn') {
+        const queries = data.content
+          .filter(b => b.type === 'server_tool_use' && b.name === 'web_search')
+          .map(b => b.input?.query).filter(Boolean);
+        if (queries.length) setStatus(`מחפש: ${queries[queries.length - 1]}...`, true);
+
+        // web_search is a server-side tool — just send the turn back as-is so Claude can continue
+        messages.push({ role: 'assistant', content: data.content });
+      } else {
+        throw new Error(`הניתוח לא הושלם (${data.stop_reason || 'unknown'}). נסה שוב.`);
+      }
     }
 
     const textBlock = data.content
@@ -584,13 +870,17 @@ async function runAnalysis() {
       .map(b => b.text)
       .join('');
 
-    // Extract JSON robustly — handles preamble text from model
     const jsonMatch = textBlock.match(/\{[\s\S]*\}/);
     if (!jsonMatch) throw new Error('המודל לא החזיר JSON תקין. נסה שוב.');
     const parsed = JSON.parse(jsonMatch[0]);
 
+    messages.push({ role: 'assistant', content: data.content });
+
     const result = { topic, ...parsed, time: nowStr() };
+    const previous = findPreviousAnalysis(topic);
+    activeConversation = { result, systemPrompt, messages, chatLog: [] };
     renderResult(result);
+    renderComparison(result, previous);
     pushHistory(result);
     setStatus('');
 
@@ -618,6 +908,18 @@ function renderResult(r) {
       <span>${esc(p)}</span>
     </li>`).join('');
 
+  const isActive = activeConversation && activeConversation.result === r;
+  const chatHtml = isActive ? `
+    <div class="chat-section">
+      <p class="chat-label">💬 שאל את הסוכן על הניתוח הזה</p>
+      <div class="chat-log" id="chatLogArea"></div>
+      <div class="chat-input-row">
+        <input class="chat-input" id="chatInput" placeholder="למשל: מה ההשלכות על המשקיע הקטן?"
+          onkeydown="if(event.key==='Enter') sendChatMessage()" />
+        <button class="btn-chat-send" id="chatSendBtn" onclick="sendChatMessage()">שלח</button>
+      </div>
+    </div>` : '';
+
   card.innerHTML = `
     <div class="card-top">
       <span class="card-topic">${esc(r.topic)}</span>
@@ -630,7 +932,8 @@ function renderResult(r) {
     <div class="card-actions">
       <button class="btn-action" data-action="copy">⎘ העתק</button>
       <button class="btn-action" data-action="save">⬇ שמור MD</button>
-    </div>`;
+    </div>
+    ${chatHtml}`;
 
   card.addEventListener('click', e => {
     const btn = e.target.closest('[data-action]');
@@ -644,6 +947,94 @@ function renderResult(r) {
   area.innerHTML = '';
   area.appendChild(card);
   document.getElementById('mainScroll').scrollTop = 0;
+
+  if (isActive) renderChatLog();
+}
+
+/* ═══════════════════════════════════
+   CHAT WITH AGENT ABOUT THE ANALYSIS
+═══════════════════════════════════ */
+function renderChatLog() {
+  const area = document.getElementById('chatLogArea');
+  if (!area || !activeConversation) return;
+  area.innerHTML = activeConversation.chatLog.map(m =>
+    `<div class="chat-msg chat-${m.role}"><span class="chat-bubble">${esc(m.text)}</span></div>`
+  ).join('');
+  area.scrollTop = area.scrollHeight;
+}
+
+async function sendChatMessage() {
+  if (!activeConversation) return;
+  const input   = document.getElementById('chatInput');
+  const sendBtn = document.getElementById('chatSendBtn');
+  const question = input.value.trim();
+  if (!question) return;
+
+  const apiKey = getKey();
+  if (!apiKey) { showScreen('setup'); return; }
+
+  input.value = '';
+  input.disabled = true;
+  sendBtn.disabled = true;
+
+  activeConversation.chatLog.push({ role: 'user', text: question });
+  renderChatLog();
+
+  const convo = activeConversation;
+  convo.messages.push({ role: 'user', content: question });
+
+  const followUpSystem = convo.systemPrompt +
+    '\n\nהמשתמש שואל כעת שאלת המשך על הניתוח שביצעת. ענה בעברית, בטקסט חופשי קצר ולעניין (לא JSON), והתבסס על הניתוח והחיפושים שכבר נעשו. אם צריך מידע נוסף ועדכני, אפשר לבצע חיפוש נוסף.';
+
+  try {
+    let data;
+    while (true) {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 1200,
+          system: followUpSystem,
+          tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+          messages: convo.messages
+        })
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error?.message || `שגיאת שרת ${res.status}`);
+      }
+
+      data = await res.json();
+
+      if (data.stop_reason === 'end_turn') break;
+
+      if (data.stop_reason === 'pause_turn') {
+        convo.messages.push({ role: 'assistant', content: data.content });
+      } else {
+        throw new Error(`התשובה לא הושלמה (${data.stop_reason || 'unknown'}). נסה שוב.`);
+      }
+    }
+
+    convo.messages.push({ role: 'assistant', content: data.content });
+    const answer = data.content.filter(b => b.type === 'text').map(b => b.text).join('').trim();
+    convo.chatLog.push({ role: 'assistant', text: answer || '(לא התקבלה תשובה)' });
+
+  } catch (e) {
+    console.error(e);
+    convo.chatLog.push({ role: 'error', text: e.message });
+  }
+
+  renderChatLog();
+  input.disabled = false;
+  sendBtn.disabled = false;
+  input.focus();
 }
 
 /* ═══════════════════════════════════
@@ -670,6 +1061,7 @@ function renderHistory() {
   area.querySelectorAll('.history-item').forEach(el => {
     el.addEventListener('click', () => {
       renderResult(history_arr[Number(el.dataset.idx)]);
+      document.getElementById('compareArea').innerHTML = '';
     });
   });
 }
@@ -753,6 +1145,7 @@ function openSettings() {
   document.getElementById('sheetKey').value = k
     ? '••••••' + k.slice(-4)
     : '';
+  renderCustomChipsList();
   document.getElementById('settingsOverlay').classList.add('open');
 }
 
