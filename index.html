@@ -796,7 +796,7 @@ async function runAnalysis() {
 
   const deep      = deepModeActive;
   const sitesRaw  = document.getElementById('sitesInput').value.trim();
-  const maxTokens = deep ? 4000 : 2000;
+  const maxTokens = deep ? 6000 : 3000;
   const ptRange   = deep ? '8-10' : '4-6';
 
   let siteInstr = '';
@@ -835,10 +835,10 @@ async function runAnalysis() {
           'anthropic-dangerous-direct-browser-access': 'true'
         },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-6',
+          model: 'claude-sonnet-5',
           max_tokens: maxTokens,
           system: systemPrompt,
-          tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+          tools: [{ type: 'web_search_20260209', name: 'web_search' }],
           messages
         })
       });
@@ -998,10 +998,10 @@ async function sendChatMessage() {
           'anthropic-dangerous-direct-browser-access': 'true'
         },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-6',
-          max_tokens: 1200,
+          model: 'claude-sonnet-5',
+          max_tokens: 2000,
           system: followUpSystem,
-          tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+          tools: [{ type: 'web_search_20260209', name: 'web_search' }],
           messages: convo.messages
         })
       });
